@@ -2,16 +2,14 @@ const canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d"); //context
 canvas.style.backgroundColor = "green";
 
-// TO DO: fix these so they can be customized in the HTML rather than hardcoded values 
-canvas.width = 500
-canvas.height = 500
-// canvasWidth = 500
-// canvasHeight = 500
-
-const mouse = {
-    x: 0,
-    y: 0
+const canvasDimensions = {
+    width: canvas.width,
+    height: canvas.height
 }
+
+// ----------------------------------- //
+//        VARIABLES & CLASSES          //
+// ----------------------------------- //
 
 class ShakerContainer {
     constructor(x, y, w, h) {
@@ -41,11 +39,17 @@ let containerWidth = 175
 let containerHeight = 300
 var isClicked = false
 
-//TO DO: fix bug where container won't center to canvas
-var container = new ShakerContainer(((canvas.width / 2) - (containerWidth / 2)), undefined, containerWidth, containerHeight)
+const mouse = {
+    x: (canvas.width / 2) - (containerWidth / 2),
+    y: (canvas.height / 2) - (containerHeight / 2)
+}
+
+var container = new ShakerContainer(undefined, undefined, containerWidth, containerHeight)
 container.draw()
 
-
+// ----------------------------------- //
+//        FUNCTIONS & LISTENERS        //
+// ----------------------------------- //
 addEventListener('mousedown', () => {
     console.log("click!")
     isClicked = true

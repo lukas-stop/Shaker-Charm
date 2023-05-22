@@ -4,14 +4,22 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Bee!!!</title>
+    <title>Shaker Charm Simulator</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="./main.css" />
 </head>
 
 <body>
-    <p>This site lets you test what a shaker charm will look like before you order it!</p>
-    <button>Add Image</button>
-    <button>Shake!</button>
+    <div class="textContainer">
+        <p>This site lets you test what a shaker charm will look like before you order it!</p>
+        <form>
+            <label>Add an image to the shaker: </label>
+            <!-- TO DO: make the "no File Chosen" text hidden (for aesthetic)-->
+            <input type="file" id="imageFile" name="filename">
+        </form>
+        <button id="shimmyButton">Shake!</button>
+        <button id="resetButton">Reset!</button>
+    </div>
     <canvas id="canvas" width="500" height="500"></canvas>
 </body>
 <script src='./js/main.js' type="module"></script>

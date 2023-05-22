@@ -50,7 +50,7 @@ container.draw()
 // ----------------------------------- //
 //        FUNCTIONS & LISTENERS        //
 // ----------------------------------- //
-addEventListener('mousedown', () => {
+addEventListener('mousedown', (event) => {
     console.log("click!")
     isClicked = true
 })
@@ -61,13 +61,31 @@ addEventListener('mouseup', () => {
 })
 
 addEventListener('mousemove', (event) => {
+    console.log("moving!" + mouse)
     if (isClicked) {
         mouse.x = event.clientX - canvas.offsetLeft - (containerWidth / 2)
         mouse.y = event.clientY - canvas.offsetTop - (containerHeight / 2)
-        console.log("moving!" + mouse)
     }
 })
 
+
+// Button Functions
+
+const resetContainerBTN = document.getElementById("resetButton")
+
+resetWidgetBTN.addEventListener("click", () => {
+    requestAnimationFrame(animate)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    mouse.x = (canvas.width / 2) - (containerWidth / 2)
+    mouse.y = (canvas.height / 2) - (containerHeight / 2)
+    container.x = mouse.x;
+    container.y = mouse.y;
+    container.update();
+})
+
+const shimmyContainerBTN = document.getElementById("shimmyButton")
+
+// loop 
 function animate() {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)

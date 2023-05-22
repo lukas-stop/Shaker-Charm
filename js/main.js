@@ -73,7 +73,7 @@ addEventListener('mousemove', (event) => {
 
 const resetContainerBTN = document.getElementById("resetButton")
 
-resetWidgetBTN.addEventListener("click", () => {
+resetContainerBTN.addEventListener("click", () => {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     mouse.x = (canvas.width / 2) - (containerWidth / 2)
@@ -84,6 +84,9 @@ resetWidgetBTN.addEventListener("click", () => {
 })
 
 const shimmyContainerBTN = document.getElementById("shimmyButton")
+shimmyContainerBTN.addEventListener("click", () => {
+    console.log("boop") //debug
+})
 
 // loop 
 function animate() {

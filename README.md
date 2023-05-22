@@ -6,6 +6,7 @@ This widget will allow you to add as many images into a shaker charm and see how
 
 # Usage
 
+**Note: This project does not connect to any external repositories or databases.**
 (This section will be updated as this widget's development progresses)
 
 # Credits

@@ -41,6 +41,25 @@ class CharmPiece {
         this.w = w
         this.h = h
         this.color = color
+        this.dx = 0.02
+        this.dy = 2
+    }
+    update() {
+        this.draw()
+        if (this.y + this.h > ((canvasDimensions.height / 2) - (containerHeight / 2))) {
+            this.dy = -this.dy * 0.7; //0.7 is friction
+        }
+        else {
+            this.dy += 0.75; //add gravity (0.75)
+        }
+
+        if (this.x + this.w + this.dx > canvasDimensions.width || this.x - this.w <= 0) {
+            this.dx = -this.dx * (0.7 / 3);
+        }
+
+        this.x += this.dx;
+        this.y += this.dy;
+        this.draw()
     }
     draw() {
         //TO DO: update this so that it the user can specify the size of the inner charms
@@ -50,9 +69,7 @@ class CharmPiece {
         ctx.fill();
         ctx.closePath();
     }
-    update() {
-        this.draw()
-    }
+
 }
 
 // Container Setup ------------------------------------
@@ -70,8 +87,11 @@ var container = new ShakerContainer(undefined, undefined, containerWidth, contai
 // Charm Piece Setup ------------------------------------
 let charmWidth = 25
 let charmHeight = 25
-let charmX = randomIntFromRange((canvas.width - containerWidth) - 10, containerWidth + 10)
-let charmY = randomIntFromRange((canvas.height - containerHeight) - 10, containerHeight + 10)
+let charmX = randomIntFromRange((((canvas.width - containerWidth) / 2)) + 20, (containerWidth + ((canvas.width - containerWidth) / 2)) - 20)
+let charmY = randomIntFromRange((((canvas.height - containerHeight) / 2)) + 20, (containerHeight + ((canvas.height - containerHeight) / 2)) - 20)
+
+//TO DO: final adjustments for buffer
+//adding/subtracting 20 acts like a buffer so that it doesn't go over the edges (this needs to be tweaked)
 
 var innerCharm = new CharmPiece(charmX, charmY, charmWidth, charmHeight, randomColor(false))
 
@@ -99,13 +119,17 @@ addEventListener('mousemove', (event) => {
 function animate() {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    container.x = mouse.x
-    container.y = mouse.y
-    //innerCharm.x = container.x + 10 // the +10 is to add padding so its not directly against the side
-    //innerCharm.y = container.y + 10
+
+
+    //add however much the container moved to the inner charm x and y values
+    // innerCharm.x = container.x
+    // innerCharm.y = container.y
 
     innerCharm.update() //draw charms before container for proper layering
+    container.x = mouse.x
+    container.y = mouse.y
     container.update()
+
 }
 
 animate() 

@@ -70,15 +70,10 @@ var container = new ShakerContainer(undefined, undefined, containerWidth, contai
 // Charm Piece Setup ------------------------------------
 let charmWidth = 25
 let charmHeight = 25
-//TO DO: have inner charm rely on these values instead of container's x and y coordinates
-let charmX = container.x + charmWidth + 20
-let charmY = container.y + charmHeight + 20
+let charmX = randomIntFromRange((canvas.width - containerWidth) - 10, containerWidth + 10)
+let charmY = randomIntFromRange((canvas.height - containerHeight) - 10, containerHeight + 10)
 
-var innerCharm = new CharmPiece(undefined, undefined, charmWidth, charmHeight, randomColor(false))
-
-
-// randomIntFromRange((container.x + charmWidth), (container.x - charmWidth))
-// randomIntFromRange((container.y + charmHeight), (container.y - charmHeight))
+var innerCharm = new CharmPiece(charmX, charmY, charmWidth, charmHeight, randomColor(false))
 
 // ----------------------------------- //
 //        FUNCTIONS & LISTENERS        //
@@ -106,8 +101,8 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     container.x = mouse.x
     container.y = mouse.y
-    innerCharm.x = container.x + 10 // the +10 is to add padding so its not directly against the side
-    innerCharm.y = container.y + 10
+    //innerCharm.x = container.x + 10 // the +10 is to add padding so its not directly against the side
+    //innerCharm.y = container.y + 10
 
     innerCharm.update() //draw charms before container for proper layering
     container.update()

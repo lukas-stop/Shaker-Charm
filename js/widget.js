@@ -51,17 +51,17 @@ container.draw()
 //        FUNCTIONS & LISTENERS        //
 // ----------------------------------- //
 addEventListener('mousedown', (event) => {
-    console.log("click!")
+    //console.log("click!")
     isClicked = true
 })
 
 addEventListener('mouseup', () => {
-    console.log("no click!")
+    //console.log("no click!")
     isClicked = false
 })
 
 addEventListener('mousemove', (event) => {
-    console.log("moving!" + mouse)
+    //console.log("moving!" + mouse)
     if (isClicked) {
         mouse.x = event.clientX - canvas.offsetLeft - (containerWidth / 2)
         mouse.y = event.clientY - canvas.offsetTop - (containerHeight / 2)

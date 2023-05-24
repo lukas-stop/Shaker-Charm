@@ -22,18 +22,14 @@
                     <legend>Select Number of Charms</legend>
                     <p>First, select the number of charms you want within the shaker.</p>
                     <label for="charmCountInput">Number of Charms: </label><br>
-                    <input type="number" value="1" id="charmCountInput" name="charmCountInput" />
+                    <input type="number" value="1" id="charmCountInput" name="charmCountInput" min="0" max="5" />
                     <button type="button" id="addCharmBtn">+</button>
                     <button type="button" id="subtractCharmBtn">-</button>
                 </fieldset>
                 <fieldset>
                     <legend>Add Charm Images</legend>
                     <p>Then, select the images you'd like to use for each charm.</p>
-                    <!-- TO DO: Make function that adds this field per number of charms currently available-->
-                    <div id="addImageContainer">
-                        <label for="charmImgBtn">Add an image</label>
-                        <input type="file" id="charmImgBtn" name="charmImgBtn" />
-                    </div>
+                    <div id="addImageContainer"></div>
                     <!-- TO DO: make the "no File Chosen" text hidden (for aesthetic)-->
                 </fieldset>
                 <fieldset>
@@ -43,6 +39,7 @@
                     <label for="ContainerImgBtn">Add an image</label>
                     <input type="file" id="ContainerImgBtn" name="ContainerImgBtn" />
                 </fieldset>
+                <!-- TO DO: Auto-submit after selecting image -->
             </form>
             <div class="widgetControls">
                 <button id="shimmyBtn">Shake!</button>

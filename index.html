@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset='utf-8'>
@@ -10,18 +10,61 @@
 </head>
 
 <body>
-    <div class="textContainer">
+    <header>
+        <h1>Shaker Charm Simulator!</h1>
         <p>This site lets you test what a shaker charm will look like before you order it!</p>
-        <form>
-            <label>Add an image to the shaker: </label>
-            <!-- TO DO: make the "no File Chosen" text hidden (for aesthetic)-->
-            <input type="file" id="imageFile" name="filename">
-        </form>
-        <button id="shimmyButton">Shake!</button>
-        <button id="resetButton">Reset!</button>
-    </div>
-    <canvas id="canvas" width="500" height="500"></canvas>
+    </header>
+    <main>
+        <div class="btnCustomizationContainer">
+            <h2>Container Customization</h2>
+            <form>
+                <fieldset>
+                    <legend>Select Number of Charms</legend>
+                    <p>First, select the number of charms you want within the shaker.</p>
+                    <label for="charmCountInput">Number of Charms: </label><br>
+                    <input type="number" value="1" id="charmCountInput" name="charmCountInput" />
+                    <button type="button" id="addCharmBtn">+</button>
+                    <button type="button" id="subtractCharmBtn">-</button>
+                </fieldset>
+                <fieldset>
+                    <legend>Add Charm Images</legend>
+                    <p>Then, select the images you'd like to use for each charm.</p>
+                    <!-- TO DO: Make function that adds this field per number of charms currently available-->
+                    <div id="addImageContainer">
+                        <label for="charmImgBtn">Add an image</label>
+                        <input type="file" id="charmImgBtn" name="charmImgBtn" />
+                    </div>
+                    <!-- TO DO: make the "no File Chosen" text hidden (for aesthetic)-->
+                </fieldset>
+                <fieldset>
+                    <legend>Add Container Images</legend>
+                    <p>Last, add an image for the container.</p>
+                    <!-- TO DO: Make function that adds this field per number of charms currently available-->
+                    <label for="ContainerImgBtn">Add an image</label>
+                    <input type="file" id="ContainerImgBtn" name="ContainerImgBtn" />
+                </fieldset>
+            </form>
+            <div class="widgetControls">
+                <button id="shimmyBtn">Shake!</button>
+                <button id="resetContainerBtn">Put it Back!</button>
+                <button id="resetAll">Reset Everything!</button>
+            </div>
+        </div>
+        <div class="canvasContainer">
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+    </main>
+    <footer>
+        <h2>Credits</h2>
+        <p>Developed by GooseCaboose737<br>This widget is free to use so long as proper credits are given. More
+            information about this widget can be
+            found within the <a href="https://github.com/lukas-stop/Shaker-Charm">Github Repo</a>
+        </p>
+
+    </footer>
+
 </body>
-<script src='./js/main.js' type="module"></script>
+<script src='./js/widget.js' type="module"></script>
+<script src='./js/formControls.js' type="module"></script>
 
 </html>

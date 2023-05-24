@@ -30,6 +30,14 @@ class ShakerContainer {
         ctx.closePath();
     }
     update() {
+        //TO DO: keep container from going off side of screen
+        //uncomment when shimmy button becomes active
+        // if (this.x + this.w > 500 || this.x - this.w < 0) {
+        //     this.dx= -this.dx; 
+        // }
+        // if (this.y + this.h > 500 || this.y - this.h < 0) {
+        //     this.dy= -this.dy; 
+        // }
         this.draw()
     }
 }
@@ -41,20 +49,23 @@ class CharmPiece {
         this.w = w
         this.h = h
         this.color = color
-        this.dx = 0.02
+        this.dx = 0.02 //velocity
         this.dy = 2
     }
     update() {
         this.draw()
-        if (this.y + this.h > ((canvasDimensions.height / 2) - (containerHeight / 2))) {
+        //if cube is outside of max range, make it go down
+        if (this.y + this.h > containerHeight + ((canvas.height - containerHeight) / 2)) {
             this.dy = -this.dy * 0.7; //0.7 is friction
         }
         else {
             this.dy += 0.75; //add gravity (0.75)
         }
 
-        if (this.x + this.w + this.dx > canvasDimensions.width || this.x - this.w <= 0) {
-            this.dx = -this.dx * (0.7 / 3);
+        //TO DO: BUGFIX
+        //friction is sometimes random??  why?? 
+        if (this.x + this.w + this.dx > ((containerWidth + ((canvas.width - containerWidth) / 2))) || this.x - this.w <= 0) {
+            this.dx = -this.dx * (0.7 / 3); //reverse direction and add friction
         }
 
         this.x += this.dx;
@@ -82,7 +93,7 @@ const mouse = {
     y: (canvas.height / 2) - (containerHeight / 2)
 }
 
-var container = new ShakerContainer(undefined, undefined, containerWidth, containerHeight)
+var container = new ShakerContainer(mouse.x, mouse.y, containerWidth, containerHeight)
 
 // Charm Piece Setup ------------------------------------
 let charmWidth = 25
@@ -120,14 +131,20 @@ function animate() {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+    //TO DO: BUGFIX: mouse going off screen sometimes leaves whitespace between canvas border and container
+    //if mouse is within range of canvas
+    if ((mouse.x < (canvas.width - container.w) && mouse.x > 0)) {
+        container.x = mouse.x
+    }
+    if (mouse.y < (canvas.height - container.h) && mouse.y > 0) {
+        container.y = mouse.y
+    }
+    //else we're on an edge    
 
-    //add however much the container moved to the inner charm x and y values
-    // innerCharm.x = container.x
-    // innerCharm.y = container.y
-
-    innerCharm.update() //draw charms before container for proper layering
-    container.x = mouse.x
-    container.y = mouse.y
+    //TO DO: take into account the container's current x and y (this is so it can update as container moves)
+    innerCharm.x = container.x
+    innerCharm.y = container.y
+    innerCharm.update() //draw charms before container for proper layering    
     container.update()
 
 }

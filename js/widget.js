@@ -83,6 +83,7 @@ resetContainerBTN.addEventListener("click", () => {
 // Reset All
 const resetAllBTN = document.getElementById("resetAll")
 resetAllBTN.addEventListener("click", () => {
+    document.getElementById("addImageContainer").innerHTML = ''
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     mouse.x = (canvas.width / 2) - (containerWidth / 2)

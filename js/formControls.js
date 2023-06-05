@@ -35,6 +35,15 @@ addCharmBTN.addEventListener("click", () => {
     }
 })
 
+//Resets the counter for inner charms
+//TO DO: rework to combine with the resetAllBTN in widget.js (? -> currently seperate to avoid having to pass variables from one file to another)
+const resetAllBTN = document.getElementById("resetAll")
+resetAllBTN.addEventListener("click", () => {
+    charmCount.value = 0
+    document.getElementById("addImageContainer").innerHTML = ''
+    containerHTML = []
+})
+
 // Defaults to whatever was previously inputted on page load
 window.addEventListener("load", () => {
     for (var i = 0; i < Number(charmCount.value); i++) {
@@ -57,5 +66,6 @@ function checkIfInRange() {
     addCharmBTN.disabled = false
     subtractCharmBTN.disabled = false
 }
+
 
 

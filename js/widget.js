@@ -50,24 +50,57 @@ container.draw()
 // ----------------------------------- //
 //        FUNCTIONS & LISTENERS        //
 // ----------------------------------- //
-addEventListener('mousedown', () => {
-    console.log("click!")
+addEventListener('mousedown', (event) => {
+    //console.log("click!")
     isClicked = true
 })
 
 addEventListener('mouseup', () => {
-    console.log("no click!")
+    //console.log("no click!")
     isClicked = false
 })
 
 addEventListener('mousemove', (event) => {
+    //console.log("moving!" + mouse)
     if (isClicked) {
         mouse.x = event.clientX - canvas.offsetLeft - (containerWidth / 2)
         mouse.y = event.clientY - canvas.offsetTop - (containerHeight / 2)
-        console.log("moving!" + mouse)
     }
 })
 
+// Reset Container
+const resetContainerBTN = document.getElementById("resetContainerBtn")
+resetContainerBTN.addEventListener("click", () => {
+    requestAnimationFrame(animate)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    mouse.x = (canvas.width / 2) - (containerWidth / 2)
+    mouse.y = (canvas.height / 2) - (containerHeight / 2)
+    container.x = mouse.x;
+    container.y = mouse.y;
+    container.update();
+})
+
+// Reset All
+const resetAllBTN = document.getElementById("resetAll")
+resetAllBTN.addEventListener("click", () => {
+    document.getElementById("addImageContainer").innerHTML = ''
+    requestAnimationFrame(animate)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    mouse.x = (canvas.width / 2) - (containerWidth / 2)
+    mouse.y = (canvas.height / 2) - (containerHeight / 2)
+    container.x = mouse.x;
+    container.y = mouse.y;
+    container.update();
+})
+
+// Shake Container
+
+const shimmyContainerBTN = document.getElementById("shimmyBtn")
+shimmyContainerBTN.addEventListener("click", () => {
+    console.log("boop") //debug
+})
+
+// loop 
 function animate() {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)

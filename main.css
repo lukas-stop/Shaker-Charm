@@ -1,0 +1,25 @@
+body {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+footer {
+    position: fixed;
+    bottom: 20px;
+}
+.btnCustomizationContainer {
+    margin: 10px 50px 2px 50px;
+    width: 33vw;
+    float: left;
+}
+
+.canvasContainer {
+    margin: 0 auto;
+}
+
+.btnCustomizationContainer fieldset {
+    border: 2px solid black;
+}
+
+.widgetControls {
+    margin-top: 20px;
+}

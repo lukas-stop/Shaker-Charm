@@ -20,6 +20,7 @@ subtractCharmBTN.addEventListener("click", () => {
         //Probs a hacky way to do this, will clear the container then redisplay the current array of html
         document.getElementById("addImageContainer").innerHTML = ""
         document.getElementById("addImageContainer").innerHTML = containerHTML.join('')
+        checkIfInRange()
     }
 })
 
@@ -30,21 +31,31 @@ addCharmBTN.addEventListener("click", () => {
         charmCount.value = Number(charmCount.value) + 1
         containerHTML.push(ImageBtnHTML)
         document.getElementById("addImageContainer").innerHTML = containerHTML.join('')
+        checkIfInRange()
     }
 })
 
 // Defaults to whatever was previously inputted on page load
-
 window.addEventListener("load", () => {
     for (var i = 0; i < Number(charmCount.value); i++) {
         containerHTML.push(ImageBtnHTML)
     }
     document.getElementById("addImageContainer").innerHTML = containerHTML.join('')
+    checkIfInRange()
 })
 
-// TO DO: Disable buttons if outside of range
-
-
-
+// Disables the buttons if outside of mix/max range
+function checkIfInRange() {
+    if (Number(charmCount.value) == maxInnerCharms) {
+        addCharmBTN.disabled = true
+        return
+    }
+    else if (Number(charmCount.value) == 0) {
+        subtractCharmBTN.disabled = true
+        return
+    }
+    addCharmBTN.disabled = false
+    subtractCharmBTN.disabled = false
+}
 
 

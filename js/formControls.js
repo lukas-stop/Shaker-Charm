@@ -2,7 +2,6 @@
 //        FOR ADDING CHARMS TO THE CONTAINER        //
 // ------------------------------------------------ //
 
-// Add/Subtract the number of charms on a screen
 const addCharmBTN = document.getElementById("addCharmBtn")
 const subtractCharmBTN = document.getElementById("subtractCharmBtn")
 const charmCount = document.getElementById("charmCountInput")
@@ -12,6 +11,7 @@ const maxInnerCharms = 5 //change this to adjust the total charms inside contain
 const ImageBtnHTML = "<label for=\"charmImgBtn\">Add an image: </label><input type=\"file\" id=\"charmImgBtn\" name=\"charmImgBtn\" /><br>"
 let containerHTML = []
 
+//Remove a charm -----------------
 subtractCharmBTN.addEventListener("click", () => {
     if (Number(charmCount.value) > 0) {
         charmCount.value = Number(charmCount.value) - 1
@@ -23,6 +23,7 @@ subtractCharmBTN.addEventListener("click", () => {
     }
 })
 
+//Add a charm -----------------
 addCharmBTN.addEventListener("click", () => {
     //temp limit to ensure things don't get crazy
     if (Number(charmCount.value) < maxInnerCharms) {

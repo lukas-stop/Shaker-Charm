@@ -55,22 +55,22 @@ class CharmPiece {
     update() {
         this.draw()
         //if cube is outside of max range, make it go down
-        if (this.y + this.h > containerHeight + ((canvas.height - containerHeight) / 2)) {
-            this.dy = -this.dy * 0.7; //0.7 is friction
-        }
-        else {
-            this.dy += 0.75; //add gravity (0.75)
-        }
+        // if (this.y + this.h > containerHeight + ((canvas.height - containerHeight) / 2)) {
+        //     this.dy = -this.dy * 0.7; //0.7 is friction
+        // }
+        // else {
+        //     this.dy += 0.75; //add gravity (0.75)
+        // }
 
         //TO DO: BUGFIX
         //friction is sometimes random??  why?? 
-        if (this.x + this.w + this.dx > ((containerWidth + ((canvas.width - containerWidth) / 2))) || this.x - this.w <= 0) {
-            this.dx = -this.dx * (0.7 / 3); //reverse direction and add friction
-        }
+        // if (this.x + this.w + this.dx > ((containerWidth + ((canvas.width - containerWidth) / 2))) || this.x - this.w <= 0) {
+        //     this.dx = -this.dx * (0.7 / 3); //reverse direction and add friction
+        // }
 
-        this.x += this.dx;
-        this.y += this.dy;
-        this.draw()
+        //this.x += this.dx;
+        //this.y += this.dy;
+        //this.draw()
     }
     draw() {
         //TO DO: update this so that it the user can specify the size of the inner charms
@@ -95,27 +95,21 @@ const mouse = {
 
 var container = new ShakerContainer(mouse.x, mouse.y, containerWidth, containerHeight)
 
-// Charm Piece Setup ------------------------------------
-let charmWidth = 25
-let charmHeight = 25
-let charmX = randomIntFromRange((((canvas.width - containerWidth) / 2)) + 20, (containerWidth + ((canvas.width - containerWidth) / 2)) - 20)
-let charmY = randomIntFromRange((((canvas.height - containerHeight) / 2)) + 20, (containerHeight + ((canvas.height - containerHeight) / 2)) - 20)
+
 
 //TO DO: final adjustments for buffer
 //adding/subtracting 20 acts like a buffer so that it doesn't go over the edges (this needs to be tweaked)
-
-var innerCharm = new CharmPiece(charmX, charmY, charmWidth, charmHeight, randomColor(false))
 
 // ----------------------------------- //
 //        FUNCTIONS & LISTENERS        //
 // ----------------------------------- //
 addEventListener('mousedown', () => {
-    console.log("click!")
+    //console.log("click!")
     isClicked = true
 })
 
 addEventListener('mouseup', () => {
-    console.log("no click!")
+    //console.log("no click!")
     isClicked = false
 })
 
@@ -123,8 +117,35 @@ addEventListener('mousemove', (event) => {
     if (isClicked) {
         mouse.x = event.clientX - canvas.offsetLeft - (containerWidth / 2)
         mouse.y = event.clientY - canvas.offsetTop - (containerHeight / 2)
-        console.log("moving!" + mouse)
+        //console.log("moving!" + mouse)
     }
+})
+
+// Charm Piece Setup ------------------------------------
+
+//TO DO: combine w functions in formControls.js (? -> currently seperate for organization reasons)
+const addCharmBTN = document.getElementById("addCharmBtn")
+const subtractCharmBTN = document.getElementById("subtractCharmBtn")
+const charmCount = document.getElementById("charmCountInput")
+let innerCharms = []
+
+function createInnerCharm() {
+    let charmWidth = 25
+    let charmHeight = 25
+    let charmX = randomIntFromRange((((canvas.width - containerWidth) / 2)) + 20, (containerWidth + ((canvas.width - containerWidth) / 2)) - 20)
+    let charmY = randomIntFromRange((((canvas.height - containerHeight) / 2)) + 20, (containerHeight + ((canvas.height - containerHeight) / 2)) - 20)
+    const color = randomColor(false)
+    return new CharmPiece(charmX, charmY, charmWidth, charmHeight, color)
+}
+
+// Add a charm
+addCharmBTN.addEventListener("click", () => {
+    innerCharms.push(createInnerCharm())
+})
+
+// Remove a charm
+subtractCharmBTN.addEventListener("click", () => {
+    innerCharms.pop()
 })
 
 // Reset Container
@@ -142,6 +163,7 @@ resetContainerBTN.addEventListener("click", () => {
 // Reset All
 const resetAllBTN = document.getElementById("resetAll")
 resetAllBTN.addEventListener("click", () => {
+    innerCharms = []
     document.getElementById("addImageContainer").innerHTML = ''
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -153,11 +175,11 @@ resetAllBTN.addEventListener("click", () => {
 })
 
 // Shake Container
-
 const shimmyContainerBTN = document.getElementById("shimmyBtn")
 shimmyContainerBTN.addEventListener("click", () => {
     console.log("boop") //debug
 })
+
 
 function animate() {
     requestAnimationFrame(animate)
@@ -174,9 +196,11 @@ function animate() {
     //else we're on an edge    
 
     //TO DO: take into account the container's current x and y (this is so it can update as container moves)
-    innerCharm.x = container.x
-    innerCharm.y = container.y
-    innerCharm.update() //draw charms before container for proper layering    
+    // innerCharm.x = container.x
+    // innerCharm.y = container.y
+    innerCharms.forEach(innerCharm => {
+        innerCharm.update(); //draw charms before container for proper layering 
+    })
     container.update()
 
 }

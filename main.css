@@ -12,8 +12,12 @@ footer {
     float: left;
 }
 
-.canvasContainer {
+.canvasContainer {   
+    background-color: #aaa;
+    height: 700px;
+    width: 700px;
     margin: 0 auto;
+    display: inline-block;
 }
 
 .btnCustomizationContainer fieldset {

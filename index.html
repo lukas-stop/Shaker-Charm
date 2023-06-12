@@ -47,9 +47,7 @@
                 <button id="resetAll">Reset Everything!</button>
             </div>
         </div>
-        <div class="canvasContainer">
-            <canvas id="canvas" width="500" height="500"></canvas>
-        </div>
+        <div class="canvasContainer" id="canvasContainer"></div>
     </main>
     <footer>
         <h2>Credits</h2>
@@ -61,7 +59,8 @@
     </footer>
 
 </body>
-<script src='./js/main.js' type="module"></script>
+<script src='./node_modules/konva/konva.js' defer></script>
+<script src='./js/konvaTest.js' type="module"></script>
 <script src='./js/formControls.js' type="module"></script>
 
 </html>
